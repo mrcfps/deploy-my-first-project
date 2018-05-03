@@ -1,0 +1,11 @@
+---
+- name: Deploy Static Site with Nginx
+  hosts: all
+  become: True
+  tasks:
+    - name: Install Nginx
+      apt: name=nginx update_cache=yes
+    - name: Copy index.html
+      copy: src=index.html dest=/usr/share/nginx/html/index.html mode=0644
+    - name: Restart Nginx
+      service: name=nginx state=restarted
